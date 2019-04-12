@@ -1,0 +1,8 @@
+class CreateTaskUsers < ActiveRecord::Migration[5.2]
+  def change
+    create_table :task_users do |t|
+
+      t.timestamps
+    end
+  end
+end
