@@ -34,6 +34,12 @@ group :development, :test do
   gem 'pry'
   gem 'reek'
   gem 'rubocop'
+  gem 'rubocop-performance'
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+    gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => 'master'
+  end
+  gem 'factory_bot_rails'
+  gem "letter_opener"
 end
 
 group :development do
@@ -42,7 +48,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
 gem 'devise_token_auth'
+gem 'figaro'
+# Authorization through social networks
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
