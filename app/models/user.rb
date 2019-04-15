@@ -5,10 +5,12 @@ class User < ActiveRecord::Base
   has_many :tasks, through: :task_users
   has_one_attached :image
 
+  # has_one_attached :image
+
   MAX_SIZE = 30_000_000
 
-  validate  :correct_image_mime_type
-  validate  :check_image_size
+  # validate  :correct_image_mime_type
+  # validate  :check_image_size
   validates :email,                     format: { with: URI::MailTo::EMAIL_REGEXP },
                                         presence: true
   validates :name,                      length: { maximum: 20 }, presence: true
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
 
   def check_image_size
