@@ -6,3 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.new(name: 'Max', email: 'task_manegment@gmail.com', password: 'qqqqqqq').save
+
+# 10.times do |x|
+#   User.tasks.create()
+# end

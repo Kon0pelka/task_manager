@@ -25,9 +25,19 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    it 'with image' do
-      assc = described_class.reflect_on_association(:image_attachment)
-      expect(assc.macro).to eq :has_one
+    # it 'with image' do
+    #   assc = described_class.reflect_on_association(:image_attachment)
+    #   expect(assc.macro).to eq :has_one
+    # end
+
+    it 'with task model' do
+      assc = described_class.reflect_on_association(:tasks)
+      expect(assc.macro).to eq :has_many
+    end
+
+    it 'with task_user model' do
+      assc = described_class.reflect_on_association(:task_users)
+      expect(assc.macro).to eq :has_many
     end
   end
 end

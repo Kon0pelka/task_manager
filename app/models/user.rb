@@ -2,14 +2,8 @@
 
 class User < ActiveRecord::Base
   has_many :task_users
-  has_many :tasks, through: :task_users
-  has_one_attached :image
-
+  has_many :tasks
   # has_one_attached :image
-  
-  has_many :task_users
-  has_many :tasks, through: :task_users
-  has_one_attached :image
 
   MAX_SIZE = 30_000_000
 
