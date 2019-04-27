@@ -8,13 +8,13 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
-    binding.pry
-    new_task = Task.new(task_params.merdge(user: current_user))
-    if new_task.save
-      render json: new_task, status: :ok
-    else
-      render json: { errorsz: new_task.errors.full_messages }, status: 400
-    end
+    # binding.pry
+    # new_task = Task.new(task_params.merdge(user: current_user))
+    # if new_task.save
+    #   render json: new_task, status: :ok
+    # else
+    #   render json: { errorsz: new_task.errors.full_messages }, status: 400
+    # end
   end
 
   def show
@@ -22,11 +22,11 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def update
-    if task.update_attributes(task_params)
-      render json: task, status: :ok
-    else
-      render json: { errors: task.errors.full_messages }, status: 400
-    end
+    # if task.update_attributes(task_params)
+    #   render json: task, status: :ok
+    # else
+    #   render json: { errors: task.errors.full_messages }, status: 400
+    # end
   end
 
   def delete

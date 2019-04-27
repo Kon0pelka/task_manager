@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_27_064035) do
+ActiveRecord::Schema.define(version: 2019_04_27_105622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2019_04_27_064035) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "title", limit: 50, null: false
+    t.text "discription"
+    t.integer "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -46,6 +54,15 @@ ActiveRecord::Schema.define(version: 2019_04_27_064035) do
     t.datetime "date_task", null: false
     t.integer "director_id"
     t.integer "executor_id"
+    t.integer "group_id"
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "group_id"], name: "index_user_groups_on_user_id_and_group_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,6 +90,10 @@ ActiveRecord::Schema.define(version: 2019_04_27_064035) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "groups", "users", column: "owner_id"
+  add_foreign_key "tasks", "groups"
   add_foreign_key "tasks", "users", column: "director_id"
   add_foreign_key "tasks", "users", column: "executor_id"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
 end
