@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 class Task < ApplicationRecord
-  has_many :task_users
-  belongs_to :user
+  belongs_to :executor, class_name: 'User', foreign_key: 'executor_id'
+  belongs_to :director, class_name: 'User', foreign_key: 'director_id'
+
+  has_many_attached :docs
 
   validates :title,                      length: { maximum: 50 }, presence: true
 end

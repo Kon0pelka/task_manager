@@ -10,11 +10,15 @@ RSpec.describe Task, type: :model do
 
   describe 'associations' do
     it 'with user model' do
-      assc = described_class.reflect_on_association(:user)
+      assc = described_class.reflect_on_association(:executor)
       expect(assc.macro).to eq :belongs_to
     end
-    it 'with task_users model' do
-      assc = described_class.reflect_on_association(:task_users)
+    it 'with user model' do
+      assc = described_class.reflect_on_association(:director)
+      expect(assc.macro).to eq :belongs_to
+    end
+    it 'with docs' do
+      assc = described_class.reflect_on_association(:docs_attachments)
       expect(assc.macro).to eq :has_many
     end
   end
