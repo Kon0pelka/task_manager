@@ -4,17 +4,17 @@ class Api::V1::TasksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    current_user.tasks
+    render json: { tasks_executor: current_user.tasks_executor,
+                   tasks_director: current_user.tasks_director }
   end
 
   def create
-    # binding.pry
-    # new_task = Task.new(task_params.merdge(user: current_user))
-    # if new_task.save
-    #   render json: new_task, status: :ok
-    # else
-    #   render json: { errorsz: new_task.errors.full_messages }, status: 400
-    # end
+    new_task = Task.new(task_params.merge(executor: current_user, director: current_user))
+    if new_task.save
+      render json: new_task, status: :ok
+    else
+      render json: { errorsz: new_task.errors.full_messages }, status: 400
+    end
   end
 
   def show
@@ -22,24 +22,24 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def update
-    # if task.update_attributes(task_params)
-    #   render json: task, status: :ok
-    # else
-    #   render json: { errors: task.errors.full_messages }, status: 400
-    # end
+    if task.update_attributes(task_params)
+      render json: task, status: :ok
+    else
+      render json: { errors: task.errors.full_messages }, status: 400
+    end
   end
 
-  def delete
+  def destroy
     task.delete
   end
 
   private
 
   def task_params
-    params.permit(:title, :description, :date, :to_remind, :status)
+    params.permit(:title, :description, :date_task, :to_remind, :status)
   end
 
   def task
-    current_user.tasks.find(params[:id])
+    current_user.tasks_director.find(params[:id])
   end
 end

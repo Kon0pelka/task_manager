@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :tasks_executor, class_name: 'Task', foreign_key: 'executor_id'
   has_many :groups, through: :user_groups
   has_many :user_groups, dependent: :destroy
+  has_many :owner_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
 
   has_one_attached :image
 
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
   def check_image_size
