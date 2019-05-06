@@ -10,4 +10,6 @@ class Task < ApplicationRecord
   enum status: %i[set performed done]
 
   validates :title,                      length: { maximum: 50 }, presence: true
+
+  # TODO: edit validation files and check it
 end

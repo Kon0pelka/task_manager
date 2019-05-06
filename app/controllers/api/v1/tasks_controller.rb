@@ -40,6 +40,6 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def task
-    current_user.tasks_director.find(params[:id])
+    current_user.tasks_director.find_by_id(params[:id])
   end
 end

@@ -3,8 +3,8 @@
 class User < ActiveRecord::Base
   has_many :tasks_director, class_name: 'Task', foreign_key: 'director_id', dependent: :destroy
   has_many :tasks_executor, class_name: 'Task', foreign_key: 'executor_id'
-  has_many :groups, through: :user_groups
   has_many :user_groups, dependent: :destroy
+  has_many :groups, through: :user_groups
   has_many :owner_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
 
   has_one_attached :image
