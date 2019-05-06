@@ -18,7 +18,7 @@ class Api::V1::Admin::GroupsController < ApplicationController
   end
 
   def show
-    render json: current_user.owner_groups.find_by_id(params[:id]), include: %w[users tasks]
+    render json: group, include: %w[users tasks]
   end
 
   def update

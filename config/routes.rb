@@ -7,7 +7,10 @@ Rails.application.routes.draw do
       namespace :admin do
         resources :groups do
           resources :tasks
-          resources :users
+          resources :users,         only: %i[index show] do
+            post 'add_user',        to: 'users#add_user'
+            post 'remove_user',     to: 'users#remove_user'
+          end
         end
       end
     end

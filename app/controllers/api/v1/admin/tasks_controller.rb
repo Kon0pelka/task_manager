@@ -3,10 +3,9 @@
 class Api::V1::Admin::TasksController < ApplicationController
   before_action :authenticate_user!
 
-  # def index
-  #   render json: { tasks_executor: current_user.tasks_executor,
-  #                  tasks_director: current_user.tasks_director }
-  # end
+  def index
+    render json: group.tasks
+  end
 
   # def create
   #   new_task = Task.new(task_params.merge(executor: current_user, director: current_user))
@@ -17,9 +16,9 @@ class Api::V1::Admin::TasksController < ApplicationController
   #   end
   # end
 
-  # def show
-  #   render json: task
-  # end
+  def show
+    render json: task, include: %w[tasks_executor tasks_director]
+  end
 
   # def update
   #   if task.update_attributes(task_params)
@@ -34,13 +33,17 @@ class Api::V1::Admin::TasksController < ApplicationController
   #   render status: :ok
   # end
 
-  # private
+  private
 
-  # def task_params
-  #   params.permit(:title, :description, :date_task, :to_remind, :status)
-  # end
+  def task_params
+    params.permit(:title, :description, :date_task, :to_remind, :status)
+  end
 
-  # def task
-  #   current_user.tasks_director.find_by_id(params[:id])
-  # end
+  def task
+    group.tasks.find_by_id(params[:id])
+  end
+
+  def group
+    current_user.owner_groups.find_by_id(params[:group_id])
+  end
 end
