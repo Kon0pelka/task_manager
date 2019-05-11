@@ -8,6 +8,7 @@
 user = User.new(name: 'Max', email: 'example@g.com', password: 'qqqqqqq')
 user.skip_confirmation!
 user.save!
+
 # 10.times do |x|
 #   User.tasks.create()
 # end
