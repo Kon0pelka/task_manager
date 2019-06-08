@@ -5,9 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.new(name: 'Max', email: 'example@g.com', password: 'qqqqqqq')
+user = User.new(name: 'Max', email: 'example@g.com', password: 'qqqqqqq', friendly_id: 'Max#' + SecureRandom.hex(4))
 user.skip_confirmation!
-user.save!
+user.save
 
 # 10.times do |x|
 #   User.tasks.create()

@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users, only: %i[index show new destroy create]
+      resources :friends, only: %i[index show new destroy create]
+      resources :groups, only: %i[index show new destroy create]
+      resources :tasks, only: %i[index show new destroy create]
+      resources :user_groups, only: %i[index show new destroy create]
+
+      root to: "users#index"
+    end
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
       resources :tasks

@@ -18,7 +18,11 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def show
-    task
+    if task
+      render json: task, status: :ok
+    else
+      render status: 404
+    end
   end
 
   def update
@@ -31,6 +35,7 @@ class Api::V1::TasksController < ApplicationController
 
   def destroy
     task.delete
+    render status: :ok
   end
 
   private

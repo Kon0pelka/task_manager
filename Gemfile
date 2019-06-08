@@ -50,6 +50,7 @@ group :development do
 end
 gem 'devise_token_auth'
 gem 'figaro'
+gem "administrate"
 # Authorization through social networks
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'

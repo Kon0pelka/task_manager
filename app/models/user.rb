@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
-  before_validation :generate_friendly_id
+  #before_validation :generate_friendly_id
 
   has_many :tasks_director, class_name: 'Task', foreign_key: 'director_id', dependent: :destroy
   has_many :tasks_executor, class_name: 'Task', foreign_key: 'executor_id'
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :user_groups
   has_many :owner_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
   has_many :friends, dependent: :destroy
-  has_many :friendly_users, class_name: 'User', through: :friends
+  has_many :friendly_users, class_name: 'User', through: :friends, source: :friend
 
   has_one_attached :image
 
