@@ -5,7 +5,7 @@ class Task < ApplicationRecord
   belongs_to :director, class_name: 'User', foreign_key: 'director_id'
   belongs_to :group, optional: true
 
-  has_many_attached :docs
+  has_one_attached :doc
 
   enum status: %i[set performed done]
 

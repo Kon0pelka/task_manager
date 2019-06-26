@@ -12,6 +12,7 @@ class GroupDashboard < Administrate::BaseDashboard
     users: Field::HasMany,
     tasks: Field::HasMany,
     owner: Field::BelongsTo.with_options(class_name: "User"),
+    image: Field::ActiveStorage.with_options({destroy_path: :remove_attachment_admin_groups_path}),
     id: Field::Number,
     title: Field::String,
     discription: Field::Text,
@@ -26,6 +27,7 @@ class GroupDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :id,
     :user_groups,
     :users,
     :tasks,
@@ -35,29 +37,25 @@ class GroupDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :user_groups,
-    :users,
-    :tasks,
     :owner,
     :id,
     :title,
     :discription,
     :owner_id,
-    :created_at,
-    :updated_at,
+    :user_groups,
+    :users,
+    :tasks,
+    :image
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :user_groups,
-    :users,
-    :tasks,
     :owner,
     :title,
     :discription,
-    :owner_id,
+    :image
   ].freeze
 
   # Overwrite this method to customize how groups are displayed

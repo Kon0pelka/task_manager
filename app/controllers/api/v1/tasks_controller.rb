@@ -19,7 +19,8 @@ class Api::V1::TasksController < ApplicationController
 
   def show
     if task
-      render json: task, status: :ok
+      render json: { task: task, doc: task.doc.attached? ? url_for(task.doc) : nil },
+                                  status: :ok
     else
       render status: 404
     end
@@ -41,7 +42,7 @@ class Api::V1::TasksController < ApplicationController
   private
 
   def task_params
-    params.permit(:title, :description, :date_task, :to_remind, :status)
+    params.permit(:title, :description, :date_task, :to_remind, :status, :doc)
   end
 
   def task

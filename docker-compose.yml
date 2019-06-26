@@ -1,0 +1,27 @@
+version: '3'
+volumes:
+  postgres_data: {}
+  active_directory_storage: {}
+  logs_volume: {}
+services:
+  db:
+    image: postgres:10.5-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker-volumes/db/db_backup:/db_backup
+    env_file:
+      - ./docker/backend.env
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    image: diplom
+    env_file:
+      - ./docker/backend.env
+    depends_on:
+      - db
+    volumes:
+      - ./docker-volumes/active_directory_storage:/dip/storage
+    ports:
+      - "4356:3000"

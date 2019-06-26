@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
-  #before_validation :generate_friendly_id
+  #  before_validation :generate_friendly_id
+  before_save { skip_confirmation! }
 
   has_many :tasks_director, class_name: 'Task', foreign_key: 'director_id', dependent: :destroy
   has_many :tasks_executor, class_name: 'Task', foreign_key: 'executor_id'
@@ -20,7 +21,6 @@ class User < ActiveRecord::Base
   validates :email,                     format: { with: URI::MailTo::EMAIL_REGEXP },
                                         presence: true
   validates :name,                      length: { maximum: 20 }, presence: true
-  validates :friendly_id,               presence: true
 
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable and :omniauthable

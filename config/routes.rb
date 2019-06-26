@@ -2,14 +2,25 @@
 
 Rails.application.routes.draw do
   namespace :admin do
-      resources :users, only: %i[index show new destroy create]
-      resources :friends, only: %i[index show new destroy create]
-      resources :groups, only: %i[index show new destroy create]
-      resources :tasks, only: %i[index show new destroy create]
-      resources :user_groups, only: %i[index show new destroy create]
-
-      root to: "users#index"
+    resources :users, only: %i[index show new destroy create update edit] do
+      collection do
+        delete ':record_id/remove_attachment/:attachment_id', to: 'users#remove_attachment', as: :remove_attachment
+      end
     end
+    resources :groups, only: %i[index show new destroy create update edit] do
+      collection do
+        delete ':record_id/remove_attachment/:attachment_id', to: 'groups#remove_attachment', as: :remove_attachment
+      end
+    end
+    resources :tasks, only: %i[index show new destroy create update edit] do
+      collection do
+        delete ':record_id/remove_attachment/:attachment_id', to: 'tasks#remove_attachment', as: :remove_attachment
+      end
+    end
+    resources :user_groups, only: %i[index show new destroy create update edit]
+
+    root to: "users#index"
+  end
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
       resources :tasks

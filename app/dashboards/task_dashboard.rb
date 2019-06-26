@@ -12,12 +12,11 @@ class TaskDashboard < Administrate::BaseDashboard
     director: Field::BelongsTo.with_options(class_name: "User"),
     group: Field::BelongsTo,
     blob: Field::BelongsTo,
-    id: Field::Number,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
     title: Field::String,
+    id: Field::Number,
     description: Field::Text,
     status: Field::String.with_options(searchable: false),
+    doc: Field::ActiveStorage.with_options({destroy_path: :remove_attachment_admin_tasks_path}),
     to_remind: Field::Boolean,
     date_task: Field::DateTime,
     director_id: Field::Number,
@@ -30,6 +29,7 @@ class TaskDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :id,
     :executor,
     :director,
     :group
@@ -41,10 +41,6 @@ class TaskDashboard < Administrate::BaseDashboard
     :executor,
     :director,
     :group,
-    :blob,
-    :id,
-    :created_at,
-    :updated_at,
     :title,
     :description,
     :status,
@@ -52,23 +48,22 @@ class TaskDashboard < Administrate::BaseDashboard
     :date_task,
     :director_id,
     :executor_id,
+    :doc
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :executor,
-    :director,
-    :group,
-    :blob,
     :title,
     :description,
     :status,
     :to_remind,
     :date_task,
-    :director_id,
-    :executor_id,
+    :executor,
+    :director,
+    :group,
+    :doc
   ].freeze
 
   # Overwrite this method to customize how tasks are displayed

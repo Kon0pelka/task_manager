@@ -17,7 +17,7 @@ class Api::V1::Admin::TasksController < ApplicationController
   end
 
   def show
-    render json: task, include: %w[tasks_executor tasks_director]
+    render json: { task: task, doc: task.doc.attached? ? url_for(task.doc) : nil }, include: %w[executor director]
   end
 
   def update

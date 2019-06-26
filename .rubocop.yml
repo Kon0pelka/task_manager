@@ -1,6 +1,6 @@
 AllCops:
   TargetRubyVersion:
-    2.5.1
+    2.6.3
   Exclude:
     - Gemfile.lock
     - db/schema.rb

@@ -102,6 +102,9 @@ GEM
       momentjs-rails (~> 2.8)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
+    administrate-field-active_storage (0.1.4)
+      administrate (>= 0.2.0.rc1)
+      rails (>= 5.2)
     arel (9.0.0)
     ast (2.4.0)
     autoprefixer-rails (9.1.4)
@@ -329,6 +332,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate
+  administrate-field-active_storage
   bootsnap (>= 1.1.0)
   byebug
   devise_token_auth
@@ -355,7 +359,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.6.2p47
+   ruby 2.6.1p33
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
